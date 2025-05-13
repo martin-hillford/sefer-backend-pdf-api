@@ -4,8 +4,7 @@ var app = builder.WithSharedConfig().Build();
 app.MapPost("/generate", (PostModel body, IConfiguration configuration) =>
 {
     // Check if the user that used to correct api key to talk with the pdf service
-    var apiKey = configuration.GetSection("Pdf").GetValue<string>("ApiKey");
-    if (string.IsNullOrEmpty(apiKey) || body.ApiKey != apiKey) return Results.Unauthorized();
+    if(!ApiKeyValidator.Create(configuration).IsValid(body.ApiKey)) return Results.Unauthorized();
 
     // Check if the correct information is submitted
     if (string.IsNullOrEmpty(body.Html) || string.IsNullOrEmpty(body.FileName)) return Results.BadRequest();
@@ -25,8 +24,7 @@ app.MapPost("/generate", (PostModel body, IConfiguration configuration) =>
 app.MapGet("/test", ([FromQuery] string apiKey, IConfiguration configuration) =>
 {
     // Check if the user that used to correct api key to talk with the pdf service
-    var apiKeyFromConfig = configuration.GetSection("Pdf").GetValue<string>("ApiKey");
-    if (string.IsNullOrEmpty(apiKey) || apiKeyFromConfig != apiKey) return Results.Unauthorized();
+    if(!ApiKeyValidator.Create(configuration).IsValid(apiKey)) return Results.Unauthorized();
 
     // Prepare all pdf documents streams. The pdf is written to a file to prevent all kind of stream issues
     var pdfFile = Path.GetTempFileName() + ".pdf";

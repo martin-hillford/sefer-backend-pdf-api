@@ -6,12 +6,13 @@
     <Authors>Martin Hillford</Authors>
     <Copyright>2016-2025, Martin Hillford</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-    <Version>1.1.7</Version>
+    <Version>1.1.8</Version>
+    <RootNamespace>Sefer.Backed.Pdf.Api</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.5" />
     <PackageReference Include="itext7.pdfhtml" Version="5.0.5" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
-    <PackageReference Include="Sefer.Backend.SharedConfig.Lib" Version="1.1.0" />
+    <PackageReference Include="Sefer.Backend.SharedConfig.Lib" Version="1.2.0" />
   </ItemGroup>
 </Project>
